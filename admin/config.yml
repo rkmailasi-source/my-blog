@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME   # ← change this (e.g. john/my-blog)
+  name: git-gateway
   branch: main
 
 # Files are stored in /content/posts/ in your GitHub repo
