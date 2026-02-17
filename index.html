@@ -1,38 +1,102 @@
 <!DOCTYPE html>
-<html>
- 
+<html lang="en">
 <head>
-  <title>International telephone</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <!-- CSS -->
-  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/css/intlTelInput.min.css" />
-  <!-- JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Blog</title>
+  <script>if(window.location.hash.indexOf("invite_token")>-1||window.location.hash.indexOf("recovery_token")>-1||window.location.hash.indexOf("confirmation_token")>-1){var s=document.createElement("script");s.src="https://identity.netlify.com/v1/netlify-identity-widget.js";document.head.appendChild(s);}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#faf9f6;--text:#1a1814;--muted:#8a8680;--accent:#c8643a;--border:#e8e5df;--max-width:640px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:18px}
+    body{background:var(--bg);color:var(--text);font-family:"Lora",Georgia,serif;line-height:1.75;min-height:100vh;padding:0 24px;-webkit-font-smoothing:antialiased}
+    .site-wrapper{max-width:var(--max-width);margin:0 auto}
+    header{padding:64px 0 48px;border-bottom:1px solid var(--border);animation:fadeUp .6s ease both}
+    .site-name{font-family:"DM Mono",monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none;display:block;margin-bottom:12px;cursor:pointer}
+    header h1{font-size:1.9rem;font-weight:500;line-height:1.25;letter-spacing:-.02em}
+    header p.tagline{margin-top:10px;color:var(--muted);font-style:italic;font-size:.95rem}
+    nav{margin-top:24px;display:flex;gap:24px}
+    nav a{font-family:"DM Mono",monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;cursor:pointer}
+    nav a:hover,nav a.active{color:var(--text)}
+    .view{display:none;animation:fadeUp .4s ease both}
+    .view.active{display:block}
+    .post-list{padding:48px 0}
+    .post-item{display:flex;align-items:baseline;gap:20px;padding:16px 0;border-bottom:1px solid var(--border);cursor:pointer}
+    .post-date{font-family:"DM Mono",monospace;font-size:.72rem;color:var(--muted);white-space:nowrap;flex-shrink:0;min-width:90px}
+    .post-title-link{font-size:1rem;font-weight:500;color:var(--text);text-decoration:none;transition:color .2s;line-height:1.4}
+    .post-item:hover .post-title-link{color:var(--accent)}
+    .post-tag{margin-left:auto;font-family:"DM Mono",monospace;font-size:.68rem;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;flex-shrink:0}
+    .empty-state{padding:64px 0;color:var(--muted);font-style:italic;font-size:.95rem}
+    #post-view{padding:48px 0}
+    .back-btn{font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;margin-bottom:40px;display:inline-flex;align-items:center;gap:6px;transition:color .2s}
+    .back-btn:hover{color:var(--text)}
+    .post-header{margin-bottom:40px}
+    .post-header .post-date{display:block;margin-bottom:12px}
+    .post-header h2{font-size:1.7rem;font-weight:500;line-height:1.25;letter-spacing:-.02em}
+    .post-body{font-size:1rem;line-height:1.85}
+    .post-body p{margin-bottom:1.4em}
+    .post-body p:last-child{margin-bottom:0}
+    .post-body h2{font-size:1.2rem;font-weight:500;margin:2em 0 .6em;letter-spacing:-.01em}
+    .post-body blockquote{border-left:2px solid var(--accent);padding-left:20px;margin:1.6em 0;color:var(--muted);font-style:italic}
+    .post-body a{color:var(--accent)}
+    .post-body code{font-family:"DM Mono",monospace;font-size:.82em;background:#f0ede8;padding:2px 6px;border-radius:3px}
+    #about-view{padding:48px 0}
+    #about-view h2{font-size:1.4rem;font-weight:500;margin-bottom:20px;letter-spacing:-.01em}
+    #about-view p{margin-bottom:1.2em}
+    .contact-line{margin-top:32px;font-family:"DM Mono",monospace;font-size:.78rem;color:var(--muted)}
+    .contact-line a{color:var(--accent);text-decoration:none}
+    footer{padding:32px 0 48px;font-family:"DM Mono",monospace;font-size:.7rem;color:var(--muted);letter-spacing:.04em}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:520px){html{font-size:16px}.post-item{flex-wrap:wrap;gap:4px}.post-tag{display:none}}
+  </style>
 </head>
- 
 <body>
-  <div class="container">
-    <div class="col-md-8 mt-4">
-      <h5>International telephone</h5>
-      <input type="text" id="phone" />
+  <div class="site-wrapper">
+    <header>
+      <span class="site-name" onclick="showView('home')">yourname</span>
+      <h1>Notes on things that matter</h1>
+      <p class="tagline">Writing to think clearly.</p>
+      <nav>
+        <a class="active" id="nav-home" onclick="showView('home')">Writing</a>
+        <a id="nav-about" onclick="showView('about')">About</a>
+      </nav>
+    </header>
+    <div id="home-view" class="view active">
+      <div class="post-list" id="post-list"></div>
     </div>
+    <div id="post-view" class="view">
+      <button class="back-btn" onclick="showView('home')">← All posts</button>
+      <div class="post-header">
+        <span class="post-date" id="single-date"></span>
+        <h2 id="single-title"></h2>
+      </div>
+      <div class="post-body" id="single-body"></div>
+    </div>
+    <div id="about-view" class="view">
+      <h2>About</h2>
+      <p>I write to think. This blog is a place for half-formed ideas, lessons from experience, and the occasional thing I cannot stop thinking about.</p>
+      <p>I am interested in how people and organizations work, why some ideas spread and others do not, and what it means to build something worth building.</p>
+      <p class="contact-line">Get in touch: <a href="mailto:you@example.com">you@example.com</a></p>
+    </div>
+    <footer>2025 Your Name</footer>
   </div>
- 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
   <script>
-    var input = document.querySelector("#phone");
-    intlTelInput(input, {
-      initialCountry: "auto",
-      geoIpLookup: function (success, failure) {
-        $.get("https://ipinfo.io", function () { }, "jsonp").always(function (resp) {
-          var countryCode = (resp && resp.country) ? resp.country : "us";
-          success(countryCode);
-        });
-      },
-    });
+    var allPosts=[];
+    function parseFrontmatter(raw){var match=raw.match(/^---
+([\s\S]*?)
+---
+([\s\S]*)$/);if(!match)return{meta:{},body:raw};var meta={};match[1].split("
+").forEach(function(line){var parts=line.split(":");var key=parts[0];var rest=parts.slice(1);if(key&&rest.length)meta[key.trim()]=rest.join(":").trim().replace(/^["']|["']$/g,"")});return{meta:meta,body:match[2].trim()}}
+    function formatDate(d){if(!d)return"";var dt=new Date(d);return isNaN(dt)?d:dt.toLocaleDateString("en-US",{month:"short",year:"numeric"})}
+    async function loadPosts(){try{var res=await fetch("/content/posts.json");if(!res.ok)throw new Error();var files=await res.json();var posts=await Promise.all(files.map(async function(f){var r=await fetch("/content/posts/"+f);var text=await r.text();var p=parseFrontmatter(text);return Object.assign({},p.meta,{body:p.body,filename:f})}));allPosts=posts.filter(function(p){return p.draft!=="true"&&p.draft!==true}).sort(function(a,b){return new Date(b.date)-new Date(a.date)});renderList()}catch(e){renderList()}}
+    function renderList(){var list=document.getElementById("post-list");if(!allPosts.length){list.innerHTML="<p class="empty-state">No posts yet.</p>";return}list.innerHTML=allPosts.map(function(post,i){return"<div class="post-item" onclick="openPost("+i+")"><span class="post-date">"+formatDate(post.date)+"</span><span class="post-title-link">"+(post.title||"Untitled")+"</span>"+(post.tags?"<span class="post-tag">"+post.tags+"</span>":"")+"</div>"}).join("")}
+    function openPost(i){var post=allPosts[i];document.getElementById("single-date").textContent=formatDate(post.date);document.getElementById("single-title").textContent=post.title||"";document.getElementById("single-body").innerHTML=marked.parse(post.body||"");showView("post");window.scrollTo({top:0,behavior:"smooth"})}
+    function showView(name){document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active")});document.getElementById(name+"-view").classList.add("active");document.querySelectorAll("nav a").forEach(function(a){a.classList.remove("active")});document.getElementById(name==="about"?"nav-about":"nav-home").classList.add("active")}
+    loadPosts();
   </script>
 </body>
- 
 </html>
